@@ -1,0 +1,6 @@
+{
+  "name": "Rodolfo Monteiro | Especialista Tenda",
+  "description": "Site institucional de Rodolfo Monteiro, Especialista Tenda em Salvador e região. Conquiste seu apartamento novo com FGTS, entrada facilitada e subsídio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

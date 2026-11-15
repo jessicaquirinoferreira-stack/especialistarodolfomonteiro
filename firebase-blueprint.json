@@ -1,0 +1,283 @@
+{
+  "entities": {
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Global site branding, theme colors, hero carousel selection, virtual assistant config, floating buttons, SEO and LGPD settings.",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "tagline": { "type": "string", "minLength": 2, "maxLength": 240 },
+        "primaryColor": { "type": "string", "minLength": 4, "maxLength": 20 },
+        "secondaryColor": { "type": "string", "minLength": 4, "maxLength": 20 },
+        "accentColor": { "type": "string", "minLength": 4, "maxLength": 20 },
+        "displayFont": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "bodyFont": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "logoUrl": { "type": "string", "maxLength": 1000 },
+        "whatsappNumber": { "type": "string", "minLength": 8, "maxLength": 30 },
+        "instagramUrl": { "type": "string", "minLength": 10, "maxLength": 300 },
+        "instagramHandle": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "heroTitle": { "type": "string", "minLength": 3, "maxLength": 180 },
+        "heroSubtitle": { "type": "string", "minLength": 3, "maxLength": 400 },
+        "heroTransition": { "type": "string", "enum": ["crossfade", "slide", "zoom"] },
+        "heroIntervalMs": { "type": "number" },
+        "heroImageUrls": { "type": "array" },
+        "floatingWhatsappEnabled": { "type": "boolean" },
+        "floatingInstagramEnabled": { "type": "boolean" },
+        "assistantEnabled": { "type": "boolean" },
+        "assistantName": { "type": "string", "minLength": 2, "maxLength": 80 },
+        "assistantAvatarUrl": { "type": "string", "maxLength": 1000 },
+        "assistantGreeting": { "type": "string", "maxLength": 400 },
+        "assistantFaqs": { "type": "array" },
+        "seoTitle": { "type": "string", "maxLength": 120 },
+        "seoDescription": { "type": "string", "maxLength": 300 },
+        "ga4Id": { "type": "string", "maxLength": 40 },
+        "gtmId": { "type": "string", "maxLength": 40 },
+        "googleAdsId": { "type": "string", "maxLength": 40 },
+        "searchConsoleVerification": { "type": "string", "maxLength": 120 },
+        "lgpdNotice": { "type": "string", "maxLength": 1000 },
+        "footerText": { "type": "string", "maxLength": 300 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["siteName", "whatsappNumber", "heroTitle", "updatedAt"]
+    },
+    "ProfessionalProfile": {
+      "title": "ProfessionalProfile",
+      "description": "Public profile and positioning for Rodolfo Monteiro.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "roleTitle": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "photoUrl": { "type": "string", "maxLength": 1000 },
+        "bioShort": { "type": "string", "maxLength": 400 },
+        "bioFull": { "type": "string", "maxLength": 2000 },
+        "region": { "type": "string", "maxLength": 200 },
+        "creci": { "type": "string", "maxLength": 60 },
+        "contactEmail": { "type": "string", "maxLength": 150 },
+        "commercialAddress": { "type": "string", "maxLength": 240 },
+        "experienceText": { "type": "string", "maxLength": 120 },
+        "highlights": { "type": "array" },
+        "instagramStatsFollowers": { "type": "string", "maxLength": 40 },
+        "instagramStatsPosts": { "type": "string", "maxLength": 40 },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "roleTitle", "bioShort", "updatedAt"]
+    },
+    "Empreendimento": {
+      "title": "Empreendimento",
+      "description": "Tenda residential development managed in the admin panel.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 2, "maxLength": 140 },
+        "slug": { "type": "string", "minLength": 2, "maxLength": 140, "pattern": "^[a-z0-9-]+$" },
+        "neighborhood": { "type": "string", "maxLength": 120 },
+        "city": { "type": "string", "maxLength": 120 },
+        "addressNote": { "type": "string", "maxLength": 240 },
+        "nearbyHighlights": { "type": "array" },
+        "status": { "type": "string", "enum": ["Lançamento", "Breve lançamento", "Em obras", "Pronto", "A confirmar"] },
+        "featured": { "type": "boolean" },
+        "published": { "type": "boolean" },
+        "confirmationPending": { "type": "boolean" },
+        "priceDisplay": { "type": "string", "maxLength": 80 },
+        "priceNumeric": { "type": "number" },
+        "bedroomsSummary": { "type": "string", "maxLength": 80 },
+        "leisureArea": { "type": "string", "maxLength": 120 },
+        "description": { "type": "string", "maxLength": 3000 },
+        "features": { "type": "array" },
+        "coverImage": { "type": "string", "maxLength": 1000 },
+        "gallery": { "type": "array" },
+        "paymentFlow": { "type": "array" },
+        "paymentFlowNote": { "type": "string", "maxLength": 400 },
+        "tendaConditions": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "slug", "city", "status", "featured", "published", "createdAt", "updatedAt"]
+    },
+    "Property": {
+      "title": "Property",
+      "description": "Individual residential unit or typology linked to an Empreendimento.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "slug": { "type": "string", "minLength": 2, "maxLength": 160, "pattern": "^[a-z0-9-]+$" },
+        "empreendimentoId": { "type": "string", "maxLength": 128 },
+        "empreendimentoName": { "type": "string", "maxLength": 140 },
+        "neighborhood": { "type": "string", "maxLength": 120 },
+        "city": { "type": "string", "maxLength": 120 },
+        "bedrooms": { "type": "number" },
+        "bathrooms": { "type": "string", "maxLength": 40 },
+        "areaText": { "type": "string", "maxLength": 60 },
+        "parkingText": { "type": "string", "maxLength": 60 },
+        "priceNumeric": { "type": "number" },
+        "priceDisplay": { "type": "string", "maxLength": 80 },
+        "entryCondition": { "type": "string", "maxLength": 160 },
+        "acceptsFgts": { "type": "boolean" },
+        "acceptsSubsidy": { "type": "boolean" },
+        "confirmationPending": { "type": "boolean" },
+        "isLaunch": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "published": { "type": "boolean" },
+        "coverImage": { "type": "string", "maxLength": 1000 },
+        "gallery": { "type": "array" },
+        "description": { "type": "string", "maxLength": 2500 },
+        "features": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "slug", "city", "bedrooms", "featured", "published", "createdAt", "updatedAt"]
+    },
+    "LandingPage": {
+      "title": "LandingPage",
+      "description": "Custom campaign or opportunity landing page, including the single Premium Landing Page.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "slug": { "type": "string", "minLength": 2, "maxLength": 140, "pattern": "^[a-z0-9-]+$" },
+        "routePrefix": { "type": "string", "enum": ["oportunidade", "campanha"] },
+        "isPremium": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["published", "paused", "draft"] },
+        "empreendimentoId": { "type": "string", "maxLength": 128 },
+        "heroKicker": { "type": "string", "maxLength": 120 },
+        "heroHeadline": { "type": "string", "minLength": 3, "maxLength": 180 },
+        "heroSubheadline": { "type": "string", "maxLength": 400 },
+        "heroImageUrl": { "type": "string", "maxLength": 1000 },
+        "ctaPrimaryText": { "type": "string", "maxLength": 80 },
+        "ctaWhatsappText": { "type": "string", "maxLength": 80 },
+        "highlights": { "type": "array" },
+        "gallery": { "type": "array" },
+        "showPaymentFlow": { "type": "boolean" },
+        "seoTitle": { "type": "string", "maxLength": 120 },
+        "seoDescription": { "type": "string", "maxLength": 300 },
+        "ogImageUrl": { "type": "string", "maxLength": 1000 },
+        "utmCampaign": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "slug", "routePrefix", "isPremium", "status", "heroHeadline", "createdAt", "updatedAt"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Simulation or contact lead submitted by a visitor.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "phone": { "type": "string", "minLength": 8, "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 150 },
+        "monthlyIncome": { "type": "string", "maxLength": 80 },
+        "hasFgts": { "type": "boolean" },
+        "fgtsEstimate": { "type": "string", "maxLength": 80 },
+        "interestEmpreendimento": { "type": "string", "maxLength": 140 },
+        "message": { "type": "string", "maxLength": 1000 },
+        "sourcePage": { "type": "string", "maxLength": 200 },
+        "utmSource": { "type": "string", "maxLength": 100 },
+        "utmMedium": { "type": "string", "maxLength": 100 },
+        "utmCampaign": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["Novo", "Em atendimento", "Simulação enviada", "Visita agendada", "Concluído"] },
+        "adminNotes": { "type": "string", "maxLength": 1000 },
+        "lgpdConsent": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "phone", "status", "lgpdConsent", "createdAt"]
+    },
+    "VisitRequest": {
+      "title": "VisitRequest",
+      "description": "Scheduled visit request for a Tenda development.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "phone": { "type": "string", "minLength": 8, "maxLength": 30 },
+        "preferredDate": { "type": "string", "maxLength": 40 },
+        "preferredPeriod": { "type": "string", "enum": ["Manhã", "Tarde", "Fim de semana"] },
+        "empreendimentoName": { "type": "string", "maxLength": 140 },
+        "notes": { "type": "string", "maxLength": 600 },
+        "sourcePage": { "type": "string", "maxLength": 200 },
+        "utmSource": { "type": "string", "maxLength": 100 },
+        "utmCampaign": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["Pendente", "Confirmada", "Realizada", "Cancelada"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "phone", "empreendimentoName", "status", "createdAt"]
+    },
+    "MediaAsset": {
+      "title": "MediaAsset",
+      "description": "Uploaded or curated visual media asset stored via Vercel Blob or gallery.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 140 },
+        "url": { "type": "string", "minLength": 4, "maxLength": 2000 },
+        "category": { "type": "string", "enum": ["Empreendimento", "Hero", "Perfil", "Landing", "Outros"] },
+        "storageProvider": { "type": "string", "enum": ["vercel-blob", "local-asset", "external"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "url", "category", "createdAt"]
+    },
+    "AnalyticsEvent": {
+      "title": "AnalyticsEvent",
+      "description": "First-party lightweight conversion and page view tracking event.",
+      "type": "object",
+      "properties": {
+        "eventType": { "type": "string", "enum": ["page_view", "whatsapp_click", "instagram_click", "simulation_submit", "visit_submit", "assistant_open"] },
+        "path": { "type": "string", "maxLength": 200 },
+        "label": { "type": "string", "maxLength": 140 },
+        "utmSource": { "type": "string", "maxLength": 100 },
+        "utmCampaign": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["eventType", "path", "createdAt"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized admin user record.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 150 },
+        "displayName": { "type": "string", "maxLength": 120 },
+        "role": { "type": "string", "enum": ["admin", "editor"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/siteSettings/{settingId}": {
+      "schema": { "$ref": "#/entities/SiteSettings" },
+      "description": "Site configuration document (typically main)."
+    },
+    "/professionalProfile/{profileId}": {
+      "schema": { "$ref": "#/entities/ProfessionalProfile" },
+      "description": "Broker profile document (typically main)."
+    },
+    "/empreendimentos/{empreendimentoId}": {
+      "schema": { "$ref": "#/entities/Empreendimento" },
+      "description": "Residential developments catalog."
+    },
+    "/properties/{propertyId}": {
+      "schema": { "$ref": "#/entities/Property" },
+      "description": "Individual properties and typologies."
+    },
+    "/landingPages/{landingPageId}": {
+      "schema": { "$ref": "#/entities/LandingPage" },
+      "description": "Public opportunity and campaign landing pages."
+    },
+    "/leads/{leadId}": {
+      "schema": { "$ref": "#/entities/Lead" },
+      "description": "PII-protected visitor simulation leads."
+    },
+    "/visitRequests/{requestId}": {
+      "schema": { "$ref": "#/entities/VisitRequest" },
+      "description": "PII-protected visit scheduling requests."
+    },
+    "/media/{mediaId}": {
+      "schema": { "$ref": "#/entities/MediaAsset" },
+      "description": "Uploaded media assets registry."
+    },
+    "/analytics/{eventId}": {
+      "schema": { "$ref": "#/entities/AnalyticsEvent" },
+      "description": "Page views and conversion click events."
+    },
+    "/adminUsers/{userId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Authorized admin user list."
+    }
+  }
+}
