@@ -1,0 +1,479 @@
+import arunaImg from '../assets/images/hero_aruna_patamares_1794756312191.jpg';
+import vilaLauraImg from '../assets/images/hero_vila_laura_1794756312318.jpg';
+import solMediterraneoImg from '../assets/images/hero_sol_mediterraneo_1794756312747.jpg';
+import rodolfoLegacyImg from '../assets/images/rodolfo_monteiro_corretor_1794756312995.jpg';
+import assistenteImg from '../assets/images/assistente_virtual_avatar_1794756313492.jpg';
+import interiorImg from '../assets/images/interior_apartamento_varanda_1794756315090.jpg';
+import officialLogoImg from '../assets/images/logo_3d_tenda_rodolfo_monteiro.png';
+import officialOfficePortraitImg from '../assets/images/retrato_profissional_escritorio_tenda.png';
+import type {
+  Empreendimento,
+  LandingPage,
+  MediaAsset,
+  ProfessionalProfile,
+  Property,
+  SiteSettings,
+} from '../types/realestate';
+
+export const GENERATED_ASSETS = {
+  aruna: arunaImg,
+  vilaLaura: vilaLauraImg,
+  solMediterraneo: solMediterraneoImg,
+  rodolfo: rodolfoLegacyImg,
+  assistente: assistenteImg,
+  interior: interiorImg,
+};
+
+export const OFFICIAL_LOGO_URL = officialLogoImg;
+
+export const OFFICIAL_RODOLFO_PHOTO_URL = officialOfficePortraitImg;
+
+const BUNDLED_ASSET_FALLBACK_MAP: Record<string, string> = {
+  '/src/assets/images/hero_aruna_patamares_1794756312191.jpg': arunaImg,
+  '/src/assets/images/hero_vila_laura_1794756312318.jpg': vilaLauraImg,
+  '/src/assets/images/hero_sol_mediterraneo_1794756312747.jpg': solMediterraneoImg,
+  '/src/assets/images/rodolfo_monteiro_corretor_1794756312995.jpg': officialOfficePortraitImg,
+  '/src/assets/images/assistente_virtual_avatar_1794756313492.jpg': assistenteImg,
+  '/src/assets/images/interior_apartamento_varanda_1794756315090.jpg': interiorImg,
+  '/src/assets/images/logo_3d_tenda_rodolfo_monteiro.png': officialLogoImg,
+  '/src/assets/images/retrato_profissional_escritorio_tenda.png': officialOfficePortraitImg,
+  'https://i.postimg.cc/gkdntt2t/Logo-3D-Tenda-Rodolfo-Monteiro.png': officialLogoImg,
+  'https://i.postimg.cc/brSH6CYr/Retrato-profissional-no-escritorio-Tenda.png': officialOfficePortraitImg,
+};
+
+export function resolveAssetUrl(url?: string): string {
+  if (!url) return '';
+  return BUNDLED_ASSET_FALLBACK_MAP[url] || url;
+}
+
+export const DEFAULT_SITE_SETTINGS: SiteSettings = {
+  id: 'main',
+  siteName: 'Rodolfo Monteiro',
+  tagline: 'Especialista Tenda em Salvador e Região',
+  primaryColor: '#C8102E',
+  secondaryColor: '#0B1F3A',
+  accentColor: '#C99E32',
+  displayFont: 'Plus Jakarta Sans',
+  bodyFont: 'DM Sans',
+  logoUrl: OFFICIAL_LOGO_URL,
+  whatsappNumber: '5571992106928',
+  instagramUrl: 'https://www.instagram.com/rodolfo_monteiro_tenda/',
+  instagramHandle: '@rodolfo_monteiro_tenda',
+  heroTitle: 'Seu novo lar pode começar aqui',
+  heroSubtitle:
+    'Especialista Tenda em Salvador e região. Conquiste seu apartamento novo com FGTS, entrada facilitada e subsídio. Faça sua simulação sem compromisso.',
+  heroTransition: 'crossfade',
+  heroIntervalMs: 5500,
+  heroImageUrls: [
+    GENERATED_ASSETS.aruna,
+    GENERATED_ASSETS.vilaLaura,
+    GENERATED_ASSETS.solMediterraneo,
+    GENERATED_ASSETS.interior,
+  ],
+  floatingWhatsappEnabled: true,
+  floatingInstagramEnabled: true,
+  assistantEnabled: true,
+  assistantName: 'Assistente da Tenda',
+  assistantAvatarUrl: GENERATED_ASSETS.assistente,
+  assistantGreeting:
+    'Olá! Sou a Assistente da Tenda do atendimento de Rodolfo Monteiro. Posso tirar dúvidas rápidas sobre FGTS, subsídio, empreendimentos ou te conectar direto no WhatsApp.',
+  assistantFaqs: [
+    {
+      id: 'faq-empreendimentos',
+      question: 'Quais empreendimentos disponíveis?',
+      keywords: ['empreendimento', 'imovel', 'imóveis', 'apartamento', 'salvador', 'patamares', 'vila laura', 'abrantes', 'aruna', 'sol'],
+      answer:
+        'Trabalhamos com referências Tenda em Salvador e região, como Aruna Patamares (Patamares), Vila Laura (Matatu) e Sol do Mediterrâneo (Abrantes · Camaçari). Como a disponibilidade muda rapidamente, Rodolfo confirma as unidades vigentes direto no WhatsApp.',
+      suggestWhatsapp: true,
+    },
+    {
+      id: 'faq-fgts',
+      question: 'Como funciona o FGTS?',
+      keywords: ['fgts', 'fundo', 'entrada', 'saldo'],
+      answer:
+        'Você pode utilizar seu saldo de FGTS para abater o valor da entrada ou compor o financiamento habitacional, seguindo as regras vigentes da Caixa. Na simulação com Rodolfo Monteiro avaliamos seu cenário sem compromisso.',
+      suggestWhatsapp: true,
+    },
+    {
+      id: 'faq-simular',
+      question: 'Quero simular sem compromisso',
+      keywords: ['simular', 'simulacao', 'simulação', 'parcela', 'subsidio', 'subsídio', 'renda'],
+      answer:
+        'Excelente passo! Você pode preencher a simulação rápida aqui no site ou falar diretamente com Rodolfo Monteiro no WhatsApp para calcular entrada facilitada e eventual subsídio para o seu perfil.',
+      suggestWhatsapp: true,
+    },
+    {
+      id: 'faq-instagram',
+      question: 'Ver novidades no Instagram',
+      keywords: ['instagram', 'insta', 'redes', 'fotos', 'highlights'],
+      answer:
+        'Acompanhe destaques e novidades de Vila Laura, Encanto Piatã, Aruna, Vale das Tulipas e outros projetos no perfil oficial @rodolfo_monteiro_tenda.',
+      suggestInstagram: true,
+      suggestWhatsapp: true,
+    },
+  ],
+  seoTitle: 'Rodolfo Monteiro | Especialista Tenda em Salvador e Região',
+  seoDescription:
+    'Seu novo lar pode começar aqui! FGTS, entrada facilitada e subsídio em empreendimentos Tenda em Salvador, Patamares, Matatu e Abrantes.',
+  ga4Id: '',
+  gtmId: '',
+  googleAdsId: '',
+  searchConsoleVerification: '',
+  lgpdNotice:
+    'Utilizamos cookies essenciais e dados enviados voluntariamente exclusivamente para realizar sua simulação imobiliária e atendimento via WhatsApp, conforme a LGPD.',
+  footerText: 'Rodolfo Monteiro · Especialista Tenda em Salvador e Região Metropolitana.',
+};
+
+export const DEFAULT_PROFILE: ProfessionalProfile = {
+  id: 'main',
+  name: 'Rodolfo Monteiro',
+  roleTitle: 'Especialista Tenda · Agente de Vendas',
+  photoUrl: OFFICIAL_RODOLFO_PHOTO_URL,
+  bioShort:
+    'Sou Rodolfo Monteiro, Especialista Tenda. Ajudo você a conquistar seu apartamento novo com as melhores condições de FGTS, entrada facilitada e subsídio. Vamos simular juntos?',
+  bioFull:
+    'Atuação dedicada aos empreendimentos Tenda em Salvador e região metropolitana — incluindo Patamares, Matatu e Abrantes/Camaçari. Atendimento consultivo e transparente para explicar entrada facilitada, uso do FGTS e simulação sem compromisso antes de qualquer decisão.',
+  region: 'Salvador e Região (Patamares, Matatu, Abrantes/Camaçari)',
+  creci: '',
+  contactEmail: '',
+  commercialAddress: '',
+  experienceText: '',
+  highlights: [
+    'Vila Laura',
+    'Encanto Piatã',
+    'Mo das Estações',
+    'Forte S. Marcos',
+    'Vale das Tulipas',
+    'Aruna',
+    'Vila S...',
+  ],
+  instagramStatsFollowers: '285',
+  instagramStatsPosts: '30',
+};
+
+export const DEFAULT_EMPREENDIMENTOS: Empreendimento[] = [
+  {
+    id: 'aruna-patamares',
+    name: 'Aruna Patamares',
+    slug: 'aruna-patamares',
+    neighborhood: 'Patamares',
+    city: 'Salvador',
+    addressNote: 'Rua Luiz Gonzaga (antiga Av. Tamburugy) · Patamares',
+    nearbyHighlights: [
+      'Localização privilegiada em Patamares',
+      'Mais de 5.500 m² de lazer completo',
+    ],
+    status: 'A confirmar',
+    featured: true,
+    published: true,
+    confirmationPending: true,
+    priceDisplay: 'R$ 441.000 (referência histórica)',
+    priceNumeric: 441000,
+    bedroomsSummary: '2 quartos com varanda',
+    leisureArea: 'Mais de 5.500 m² de lazer completo',
+    description:
+      'Referência em Patamares na Rua Luiz Gonzaga (antiga Av. Tamburugy). Empreendimento com 2 quartos com varanda, área de lazer completa com mais de 5.500 m² e condições especiais. Informações e disponibilidade sujeitas à confirmação prévia com o corretor.',
+    features: [
+      '2 quartos com varanda',
+      'Mais de 5.500 m² de lazer completo',
+      'Localização privilegiada em Patamares',
+      'Condições especiais de fluxo (a confirmar)',
+    ],
+    coverImage: GENERATED_ASSETS.aruna,
+    gallery: [GENERATED_ASSETS.aruna, GENERATED_ASSETS.interior],
+    paymentFlow: [
+      { label: 'Ato', value: 'R$ 10.000', detail: 'Valor de referência da arte' },
+      { label: '30 dias', value: 'R$ 17.050', detail: 'Parcela 30 dias' },
+      { label: '60 dias', value: 'R$ 17.050', detail: 'Parcela 60 dias' },
+      { label: '33x mensais', value: 'R$ 5.398,18', detail: 'Fluxo durante obra' },
+      { label: '4 Semestrais', value: 'R$ 15.000', detail: 'A cada 6 meses' },
+      {
+        label: 'Saldo Devedor',
+        value: 'R$ 158.760',
+        detail: 'Pode parcelar com a Tenda ou financiar quando pegar as chaves',
+      },
+    ],
+    paymentFlowNote:
+      'Fluxo de pagamento ilustrativo baseado em referência histórica da campanha. Valores, tabela vigente e disponibilidade devem ser confirmados diretamente com Rodolfo Monteiro antes do fechamento.',
+    tendaConditions: ['Entrada facilitada', 'Uso de FGTS (conforme análise)', 'Simulação sem compromisso'],
+  },
+  {
+    id: 'vila-laura',
+    name: 'Vila Laura',
+    slug: 'vila-laura',
+    neighborhood: 'Matatu',
+    city: 'Salvador',
+    addressNote: 'Matatu · Salvador (endereço completo a confirmar)',
+    nearbyHighlights: [
+      'Metrô Acesso Norte: 2,7 km',
+      'Shopping Bela Vista: 3 km',
+    ],
+    status: 'A confirmar',
+    featured: true,
+    published: true,
+    confirmationPending: true,
+    priceDisplay: 'Sob consulta (a confirmar)',
+    priceNumeric: 0,
+    bedroomsSummary: 'A confirmar',
+    leisureArea: 'A confirmar',
+    description:
+      'Empreendimento no Matatu, Salvador, com fácil mobilidade próximo ao Metrô Acesso Norte (2,7 km) e Shopping Bela Vista (3 km). Detalhes de plantas, metragens, vagas e valores vigentes estão marcados para confirmação direta com o corretor.',
+    features: [
+      'Metrô Acesso Norte a 2,7 km',
+      'Shopping Bela Vista a 3 km',
+      'Região central do Matatu · Salvador',
+      'Plantas e valores a confirmar com o corretor',
+    ],
+    coverImage: GENERATED_ASSETS.vilaLaura,
+    gallery: [GENERATED_ASSETS.vilaLaura, GENERATED_ASSETS.interior],
+    paymentFlow: [],
+    paymentFlowNote: 'Condições comerciais e tabela atualizada a confirmar diretamente com Rodolfo Monteiro.',
+    tendaConditions: ['FGTS', 'Entrada facilitada', 'Subsídio (conforme perfil)'],
+  },
+  {
+    id: 'sol-do-mediterraneo',
+    name: 'Sol do Mediterrâneo',
+    slug: 'sol-do-mediterraneo',
+    neighborhood: 'Abrantes',
+    city: 'Camaçari',
+    addressNote: 'Abrantes · Camaçari (endereço completo a confirmar)',
+    nearbyHighlights: [
+      'Outlet Premium e Estrada do Coco: 1,9 km',
+    ],
+    status: 'A confirmar',
+    featured: true,
+    published: true,
+    confirmationPending: true,
+    priceDisplay: 'Sob consulta (a confirmar)',
+    priceNumeric: 0,
+    bedroomsSummary: 'A confirmar',
+    leisureArea: 'A confirmar',
+    description:
+      'Empreendimento em Abrantes, Camaçari, a cerca de 1,9 km do Outlet Premium e da Estrada do Coco. Consulte Rodolfo Monteiro para confirmar disponibilidade atual, tipologias, metragens e condições Tenda.',
+    features: [
+      'A 1,9 km do Outlet Premium e Estrada do Coco',
+      'Região de Abrantes · Camaçari',
+      'Tipologias, vagas e metragens a confirmar',
+    ],
+    coverImage: GENERATED_ASSETS.solMediterraneo,
+    gallery: [GENERATED_ASSETS.solMediterraneo, GENERATED_ASSETS.interior],
+    paymentFlow: [],
+    paymentFlowNote: 'Tabela de unidades e fluxo de entrada a confirmar diretamente com o especialista.',
+    tendaConditions: ['FGTS', 'Entrada facilitada', 'Subsídio (conforme análise)'],
+  },
+];
+
+export const DEFAULT_PROPERTIES: Property[] = [
+  {
+    id: 'prop-aruna-2q-varanda',
+    title: 'Aruna Patamares · 2 Quartos com Varanda',
+    slug: 'aruna-patamares-2-quartos-varanda',
+    empreendimentoId: 'aruna-patamares',
+    empreendimentoName: 'Aruna Patamares',
+    neighborhood: 'Patamares',
+    city: 'Salvador',
+    bedrooms: 2,
+    bathrooms: 'A confirmar',
+    areaText: 'A confirmar',
+    parkingText: 'A confirmar',
+    priceNumeric: 441000,
+    priceDisplay: 'R$ 441.000 (referência)',
+    entryCondition: 'Ato R$ 10.000 + fluxo facilitado (a confirmar)',
+    acceptsFgts: true,
+    acceptsSubsidy: false,
+    confirmationPending: true,
+    isLaunch: true,
+    featured: true,
+    published: true,
+    coverImage: GENERATED_ASSETS.aruna,
+    gallery: [GENERATED_ASSETS.aruna, GENERATED_ASSETS.interior],
+    description:
+      'Unidade referência de 2 quartos com varanda no Aruna Patamares, com acesso a mais de 5.500 m² de lazer completo na Rua Luiz Gonzaga (antiga Av. Tamburugy). Dados históricos sujeitos à confirmação de disponibilidade.',
+    features: ['2 quartos com varanda', 'Lazer completo > 5.500 m²', 'Saldo devedor parcelável ou financiável nas chaves'],
+  },
+  {
+    id: 'prop-vila-laura-matatu',
+    title: 'Vila Laura · Unidade Matatu',
+    slug: 'vila-laura-unidade-matatu',
+    empreendimentoId: 'vila-laura',
+    empreendimentoName: 'Vila Laura',
+    neighborhood: 'Matatu',
+    city: 'Salvador',
+    bedrooms: 2,
+    bathrooms: 'A confirmar',
+    areaText: 'A confirmar',
+    parkingText: 'A confirmar',
+    priceNumeric: 0,
+    priceDisplay: 'A confirmar',
+    entryCondition: 'FGTS · Entrada facilitada · Subsídio (a confirmar)',
+    acceptsFgts: true,
+    acceptsSubsidy: true,
+    confirmationPending: true,
+    isLaunch: true,
+    featured: true,
+    published: true,
+    coverImage: GENERATED_ASSETS.vilaLaura,
+    gallery: [GENERATED_ASSETS.vilaLaura, GENERATED_ASSETS.interior],
+    description:
+      'Referência de unidade no Vila Laura (Matatu, Salvador), próximo ao Metrô Acesso Norte (2,7 km) e Shopping Bela Vista (3 km). Número exato de quartos, metragem e valores a confirmar.',
+    features: ['Próximo ao Metrô Acesso Norte (2,7 km)', 'Shopping Bela Vista a 3 km', 'Condições Tenda a confirmar'],
+  },
+  {
+    id: 'prop-sol-mediterraneo-abrantes',
+    title: 'Sol do Mediterrâneo · Unidade Abrantes',
+    slug: 'sol-do-mediterraneo-abrantes',
+    empreendimentoId: 'sol-do-mediterraneo',
+    empreendimentoName: 'Sol do Mediterrâneo',
+    neighborhood: 'Abrantes',
+    city: 'Camaçari',
+    bedrooms: 2,
+    bathrooms: 'A confirmar',
+    areaText: 'A confirmar',
+    parkingText: 'A confirmar',
+    priceNumeric: 0,
+    priceDisplay: 'A confirmar',
+    entryCondition: 'FGTS · Entrada facilitada · Subsídio (a confirmar)',
+    acceptsFgts: true,
+    acceptsSubsidy: true,
+    confirmationPending: true,
+    isLaunch: false,
+    featured: true,
+    published: true,
+    coverImage: GENERATED_ASSETS.solMediterraneo,
+    gallery: [GENERATED_ASSETS.solMediterraneo, GENERATED_ASSETS.interior],
+    description:
+      'Referência de apartamento em Abrantes, Camaçari, a 1,9 km do Outlet Premium e Estrada do Coco. Consulte para confirmar tipologias e tabela vigente.',
+    features: ['1,9 km do Outlet Premium / Estrada do Coco', 'Possibilidade de FGTS e subsídio', 'Disponibilidade a confirmar'],
+  },
+];
+
+export const DEFAULT_LANDING_PAGES: LandingPage[] = [
+  {
+    id: 'lp-aruna-patamares',
+    title: 'Aruna Patamares · Experiência Exclusiva',
+    slug: 'aruna-patamares',
+    routePrefix: 'oportunidade',
+    isPremium: true,
+    status: 'published',
+    empreendimentoId: 'aruna-patamares',
+    heroKicker: 'Oportunidade em Patamares · Salvador',
+    heroHeadline: 'Viva com mais de 5.500 m² de lazer completo em Patamares',
+    heroSubheadline:
+      'Apartamentos de 2 quartos com varanda na Rua Luiz Gonzaga (antiga Av. Tamburugy). Conheça a referência de fluxo facilitado e simule com Rodolfo Monteiro.',
+    heroImageUrl: GENERATED_ASSETS.aruna,
+    ctaPrimaryText: 'Simular Fluxo de Pagamento',
+    ctaWhatsappText: 'Confirmar Disponibilidade no WhatsApp',
+    highlights: [
+      'Localização privilegiada em Patamares (Rua Luiz Gonzaga)',
+      'Mais de 5.500 m² de lazer completo para toda a família',
+      '2 quartos com varanda e condições especiais',
+      'Saldo devedor com opção de parcelar ou financiar nas chaves',
+    ],
+    gallery: [GENERATED_ASSETS.aruna, GENERATED_ASSETS.interior, GENERATED_ASSETS.vilaLaura],
+    showPaymentFlow: true,
+    seoTitle: 'Aruna Patamares | Rodolfo Monteiro Especialista Tenda',
+    seoDescription:
+      'Conheça o Aruna Patamares em Salvador: 2 quartos com varanda, mais de 5.500 m² de lazer completo e condições especiais. Simule sem compromisso.',
+    ogImageUrl: GENERATED_ASSETS.aruna,
+    utmCampaign: 'aruna-patamares-premium',
+  },
+  {
+    id: 'lp-vila-laura',
+    title: 'Vila Laura · Matatu Salvador',
+    slug: 'vila-laura',
+    routePrefix: 'oportunidade',
+    isPremium: false,
+    status: 'published',
+    empreendimentoId: 'vila-laura',
+    heroKicker: 'Matatu · Salvador',
+    heroHeadline: 'Mobilidade urbana a minutos do Metrô Acesso Norte',
+    heroSubheadline:
+      'Vila Laura no Matatu: a 2,7 km do Metrô Acesso Norte e 3 km do Shopping Bela Vista. Simule com FGTS e entrada facilitada.',
+    heroImageUrl: GENERATED_ASSETS.vilaLaura,
+    ctaPrimaryText: 'Quero Simular Agora',
+    ctaWhatsappText: 'Falar com Rodolfo no WhatsApp',
+    highlights: [
+      '2,7 km do Metrô Acesso Norte',
+      '3 km do Shopping Bela Vista',
+      'FGTS, entrada facilitada e análise de subsídio',
+    ],
+    gallery: [GENERATED_ASSETS.vilaLaura, GENERATED_ASSETS.interior],
+    showPaymentFlow: false,
+    seoTitle: 'Vila Laura Matatu | Rodolfo Monteiro Especialista Tenda',
+    seoDescription: 'Apartamentos referência no Matatu próximo ao Metrô Acesso Norte. Simule sem compromisso.',
+    ogImageUrl: GENERATED_ASSETS.vilaLaura,
+    utmCampaign: 'vila-laura-matatu',
+  },
+  {
+    id: 'lp-tenda-salvador',
+    title: 'Campanha Casa Própria Tenda Salvador e Região',
+    slug: 'tenda-salvador',
+    routePrefix: 'campanha',
+    isPremium: false,
+    status: 'published',
+    empreendimentoId: 'sol-do-mediterraneo',
+    heroKicker: 'Salvador e Região Metropolitana',
+    heroHeadline: 'Seu novo lar pode começar aqui com FGTS e subsídio',
+    heroSubheadline:
+      'Simulação gratuita e sem compromisso para empreendimentos em Patamares, Matatu e Abrantes/Camaçari.',
+    heroImageUrl: GENERATED_ASSETS.solMediterraneo,
+    ctaPrimaryText: 'Fazer Minha Simulação',
+    ctaWhatsappText: 'Chamar Rodolfo no WhatsApp',
+    highlights: [
+      'Uso do saldo de FGTS na entrada',
+      'Entrada facilitada direto com a construtora',
+      'Atendimento consultivo do início à entrega das chaves',
+    ],
+    gallery: [GENERATED_ASSETS.solMediterraneo, GENERATED_ASSETS.aruna, GENERATED_ASSETS.interior],
+    showPaymentFlow: false,
+    seoTitle: 'Campanha Tenda Salvador e Região | Rodolfo Monteiro',
+    seoDescription: 'Simule seu apartamento Tenda em Salvador e Camaçari com FGTS e entrada facilitada.',
+    ogImageUrl: GENERATED_ASSETS.solMediterraneo,
+    utmCampaign: 'campanha-tenda-salvador',
+  },
+];
+
+export const DEFAULT_MEDIA: MediaAsset[] = [
+  {
+    id: 'media-aruna',
+    name: 'Aruna Patamares · Fachada e Lazer',
+    url: GENERATED_ASSETS.aruna,
+    category: 'Empreendimento',
+    storageProvider: 'local-asset',
+  },
+  {
+    id: 'media-vila-laura',
+    name: 'Vila Laura · Área Externa',
+    url: GENERATED_ASSETS.vilaLaura,
+    category: 'Empreendimento',
+    storageProvider: 'local-asset',
+  },
+  {
+    id: 'media-sol-mediterraneo',
+    name: 'Sol do Mediterrâneo · Piscina e Torres',
+    url: GENERATED_ASSETS.solMediterraneo,
+    category: 'Empreendimento',
+    storageProvider: 'local-asset',
+  },
+  {
+    id: 'media-interior',
+    name: 'Apartamento 2 Quartos com Varanda',
+    url: GENERATED_ASSETS.interior,
+    category: 'Hero',
+    storageProvider: 'local-asset',
+  },
+  {
+    id: 'media-rodolfo',
+    name: 'Rodolfo Monteiro · Retrato Oficial',
+    url: OFFICIAL_RODOLFO_PHOTO_URL,
+    category: 'Perfil',
+    storageProvider: 'external',
+  },
+  {
+    id: 'media-assistente',
+    name: 'Assistente Virtual da Tenda · Avatar',
+    url: GENERATED_ASSETS.assistente,
+    category: 'Perfil',
+    storageProvider: 'local-asset',
+  },
+];
