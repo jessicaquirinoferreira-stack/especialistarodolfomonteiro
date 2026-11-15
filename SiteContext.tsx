@@ -71,8 +71,11 @@ export function SiteProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [isFirebaseAdmin, setIsFirebaseAdmin] = useState(false);
-  const [directAdminEmail, setDirectAdminEmail] = useState<string | null>(null);
-  const [authReady, setAuthReady] = useState(false);
+  const [directAdminEmail, setDirectAdminEmail] = useState<string | null>(() => {
+    if (typeof window === 'undefined') return null;
+    return localStorage.getItem(ADMIN_EMAIL_KEY);
+  });
+  const [authReady, setAuthReady] = useState(true);
 
   const refreshPublicData = useCallback(async () => {
     try {
@@ -111,6 +114,7 @@ export function SiteProvider({ children }: { children: ReactNode }) {
         } else {
           localStorage.removeItem(ADMIN_TOKEN_KEY);
           localStorage.removeItem(ADMIN_EMAIL_KEY);
+          setDirectAdminEmail(null);
         }
       })
       .catch(() => {
@@ -135,39 +139,50 @@ export function SiteProvider({ children }: { children: ReactNode }) {
   }, [settings]);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      if (!currentUser) {
-        setIsFirebaseAdmin(false);
+    const unsub = onAuthStateChanged(
+      auth,
+      async (currentUser) => {
+        setUser(currentUser);
         setAuthReady(true);
-        return;
-      }
+        if (!currentUser) {
+          setIsFirebaseAdmin(false);
+          return;
+        }
 
-      try {
-        let adminVerified =
-          Boolean(currentUser.emailVerified) &&
-          currentUser.email?.toLowerCase() === OWNER_ADMIN_EMAIL;
+        try {
+          let adminVerified =
+            Boolean(currentUser.emailVerified) &&
+            currentUser.email?.toLowerCase() === OWNER_ADMIN_EMAIL;
 
-        if (!adminVerified) {
-          const adminDoc = await getDoc(doc(db, 'adminUsers', currentUser.uid));
-          if (adminDoc.exists() && currentUser.emailVerified) {
-            adminVerified = true;
+          if (!adminVerified) {
+            const adminDoc = await getDoc(doc(db, 'adminUsers', currentUser.uid));
+            if (adminDoc.exists() && currentUser.emailVerified) {
+              adminVerified = true;
+            }
           }
-        }
 
-        setIsFirebaseAdmin(adminVerified);
-        if (adminVerified) {
-          await seedDatabaseIfEmpty();
-          await refreshPublicData();
+          setIsFirebaseAdmin(adminVerified);
+          if (adminVerified) {
+            await seedDatabaseIfEmpty();
+            await refreshPublicData();
+          }
+        } catch {
+          setIsFirebaseAdmin(false);
         }
-      } catch {
-        setIsFirebaseAdmin(false);
-      } finally {
+      },
+      () => {
         setAuthReady(true);
       }
-    });
+    );
 
-    return () => unsub();
+    const fallbackTimer = setTimeout(() => {
+      setAuthReady(true);
+    }, 600);
+
+    return () => {
+      unsub();
+      clearTimeout(fallbackTimer);
+    };
   }, [refreshPublicData]);
 
   const loginWithCredentials = async (email: string, password: string) => {

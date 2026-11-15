@@ -20,6 +20,12 @@ import { AdminLeadsManager } from '../../components/admin/AdminLeadsManager';
 import { AdminSettingsManager } from '../../components/admin/AdminSettingsManager';
 import { useSite } from '../../context/SiteContext';
 import {
+  DEFAULT_EMPREENDIMENTOS,
+  DEFAULT_LANDING_PAGES,
+  DEFAULT_MEDIA,
+  DEFAULT_PROPERTIES,
+} from '../../data/seedData';
+import {
   fetchAllAnalytics,
   fetchAllEmpreendimentos,
   fetchAllLandingPages,
@@ -61,6 +67,9 @@ export function AdminPage() {
   const {
     settings,
     profile,
+    empreendimentos,
+    properties,
+    landingPages,
     user,
     adminEmail,
     isAdmin,
@@ -79,12 +88,12 @@ export function AdminPage() {
   const [authError, setAuthError] = useState('');
   const [loadingAdminData, setLoadingAdminData] = useState(false);
 
-  const [emps, setEmps] = useState<Empreendimento[]>([]);
-  const [propsList, setPropsList] = useState<Property[]>([]);
-  const [lps, setLps] = useState<LandingPage[]>([]);
+  const [emps, setEmps] = useState<Empreendimento[]>(empreendimentos);
+  const [propsList, setPropsList] = useState<Property[]>(properties);
+  const [lps, setLps] = useState<LandingPage[]>(landingPages);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [visits, setVisits] = useState<VisitRequest[]>([]);
-  const [media, setMedia] = useState<MediaAsset[]>([]);
+  const [media, setMedia] = useState<MediaAsset[]>(DEFAULT_MEDIA);
   const [analytics, setAnalytics] = useState<AnalyticsEvent[]>([]);
 
   const loadAdminData = useCallback(async () => {
@@ -92,26 +101,28 @@ export function AdminPage() {
     setLoadingAdminData(true);
     try {
       const [e, p, lp, ld, vs, md, an] = await Promise.all([
-        fetchAllEmpreendimentos(),
-        fetchAllProperties(),
-        fetchAllLandingPages(),
-        fetchAllLeads(),
-        fetchAllVisitRequests(),
-        fetchAllMedia(),
-        fetchAllAnalytics(),
+        fetchAllEmpreendimentos().catch(() => empreendimentos),
+        fetchAllProperties().catch(() => properties),
+        fetchAllLandingPages().catch(() => landingPages),
+        fetchAllLeads().catch(() => []),
+        fetchAllVisitRequests().catch(() => []),
+        fetchAllMedia().catch(() => DEFAULT_MEDIA),
+        fetchAllAnalytics().catch(() => []),
       ]);
-      setEmps(e);
-      setPropsList(p);
-      setLps(lp);
-      setLeads(ld);
-      setVisits(vs);
-      setMedia(md);
-      setAnalytics(an);
-      await refreshPublicData();
+      setEmps(e.length > 0 ? e : empreendimentos);
+      setPropsList(p.length > 0 ? p : properties);
+      setLps(lp.length > 0 ? lp : landingPages);
+      setLeads(ld || []);
+      setVisits(vs || []);
+      setMedia(md || DEFAULT_MEDIA);
+      setAnalytics(an || []);
+      await refreshPublicData().catch(() => {});
+    } catch {
+      // Graceful fallback
     } finally {
       setLoadingAdminData(false);
     }
-  }, [isAdmin, refreshPublicData]);
+  }, [isAdmin, empreendimentos, properties, landingPages, refreshPublicData]);
 
   useEffect(() => {
     if (isAdmin) {
